@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            background-color: #333;
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+
+        .navbar a:hover {
+            color: #ddd;
+        }
+
+        /* Search Bar */
+        .search-bar {
+            margin: 20px auto;
+            width: 60%;
+        }
+
+        .search-bar form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 10px;
+            font-size: 18px;
+            border: 2px solid #333;
+            border-radius: 5px 0 0 5px;
+            outline: none;
+        }
+
+        .search-bar button {
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            background-color: #333;
+            color: white;
+            cursor: pointer;
+            border-radius: 0 5px 5px 0;
+            transition: background-color 0.3s;
+        }
+
+        .search-bar button:hover {
+            background-color: #555;
+        }
+
+        /* Service Cards */
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .service-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            background-color: #f9f9f9;
+        }
+
+        .service-card h4 {
+            margin-bottom: 10px;
+        }
+
+        .service-card p {
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        /* Profile and Logout Buttons */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            text-decoration: none;
+            color: white;
+            background-color: #333;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #555;
+        }
+
+        .btn-danger {
+            background-color: #d9534f;
+        }
+
+        .btn-danger:hover {
+            background-color: #c9302c;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <h1>Service Marketplace</h1>
+        <div>
+            <a href="{% url 'profile' %}">Profile</a>
+            <a href="{% url 'logout_user' %}" class="btn btn-danger">Logout</a>
+        </div>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="search-bar">
+        <form method="GET" action="{% url 'home1' %}">
+            <input type="text" name="search" placeholder="Search services..." value="{{ request.GET.search }}">
+            <button type="submit">Search</button>
+            <button type="submit" name="search" value="">Reset</button>
+        </form>
+    </div>
+
+    <!-- Submitted Services -->
+    <h2 style="text-align: center;">Submitted Services</h2>
+    <div class="services">
+        {% for service in services %}
+        <div class="service-card">
+            <h4>{{ service.name }}</h4>
+            <p>Job: {{ service.job }}</p>
+            <p>Price: ${{ service.price }}</p>
+        </div>
+        {% empty %}
+        <p>No services found.</p>
+        {% endfor %}
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 Service Marketplace</p>
+    </footer>
+</body>
+</html>
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Home</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <h1>Hi!</h1>-->
+<!--    <div class="search-bar">-->
+<!--        <form method="GET" action="{% url 'home1' %}">-->
+<!--             <input type="text" name="search" placeholder="Search services..." value="{{ request.GET.search }}">-->
+<!--    <button type="submit">Search</button>-->
+<!--    <button type="submit" name="search" value="">Reset</button>-->
+<!--        </form>-->
+<!--    </div>-->
+<!--     <h2>Submitted Services</h2>-->
+<!--   {% for service in services %}-->
+<!--    <div>-->
+<!--        <h4>{{ service.name }}</h4>-->
+<!--        <p>Job: {{ service.job }}</p>-->
+<!--        <p>Price: ${{ service.price }}</p>-->
+<!--    </div>-->
+<!--{% empty %}-->
+<!--    <p>No services found.</p>-->
+<!--{% endfor %}-->
+
+<!--    <a href="{% url 'profile' %}" class="btn">Profile</a>-->
+<!--<a href="{% url 'logout_user' %}" class="btn btn-danger">Logout</a>-->
+
+
+<!--</body>-->
+
+
+
+<!--</html>-->
